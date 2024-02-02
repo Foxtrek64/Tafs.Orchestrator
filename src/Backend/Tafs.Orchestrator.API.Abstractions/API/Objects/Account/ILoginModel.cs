@@ -1,5 +1,5 @@
 ﻿//
-//  IOrchestratorAccountAPI.cs
+//  ILoginModel.cs
 //
 //  Author:
 //       Devin Duanne <dduanne@tafs.com>
@@ -20,26 +20,31 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-using System.Threading;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 using JetBrains.Annotations;
-using Remora.Results;
-using Tafs.Orchestrator.API.Abstractions.API.Objects.Account;
+using Remora.Rest.Core;
 
-namespace Tafs.Orchestrator.API.Abstractions.API.Rest
+namespace Tafs.Orchestrator.API.Abstractions.API.Objects.Account
 {
     /// <summary>
-    /// Represents the Orchestrator Account API.
+    /// Represents the body of a login request based on username and password.
     /// </summary>
     [PublicAPI]
-    public interface IOrchestratorAccountAPI
+    public interface ILoginModel
     {
         /// <summary>
-        /// Attempts to authenticate with the Orchestrator API.
+        /// Gets the name of the tenant to authenticate against.
         /// </summary>
-        /// <param name="loginModel">An object containing login information.</param>
-        /// <param name="ct">A cancellation token for this operation.</param>
-        /// <returns>A <see cref="Result{TEntity}"/> containing the auth token.</returns>
-        Task<Result<string>> AuthenticateAsync(ILoginModel loginModel, CancellationToken ct = default);
+        Optional<string> TenancyName { get; }
+
+        /// <summary>
+        /// Gets the username or email address.
+        /// </summary>
+        [StringLength(int.MaxValue, MinimumLength = 1)] string UsernameOrEmailAddress { get; }
+
+        /// <summary>
+        /// Gets the password.
+        /// </summary>
+        [StringLength(int.MaxValue, MinimumLength = 1)] string Password { get; }
     }
 }

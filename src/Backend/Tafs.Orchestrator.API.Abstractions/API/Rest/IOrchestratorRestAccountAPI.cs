@@ -1,5 +1,5 @@
 ﻿//
-//  ILoginModel.cs
+//  IOrchestratorAccountAPI.cs
 //
 //  Author:
 //       Devin Duanne <dduanne@tafs.com>
@@ -20,30 +20,26 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-using System.ComponentModel.DataAnnotations;
+using System.Threading;
+using System.Threading.Tasks;
 using JetBrains.Annotations;
+using Remora.Results;
+using Tafs.Orchestrator.API.Abstractions.API.Objects.Account;
 
-namespace Tafs.Orchestrator.API.Abstractions.API.Objects.Account
+namespace Tafs.Orchestrator.API.Abstractions.API.Rest
 {
     /// <summary>
-    /// Represents the body of a login request based on username and password.
+    /// Represents the Orchestrator Account API.
     /// </summary>
     [PublicAPI]
-    public interface ILoginModel
+    public interface IOrchestratorRestAccountAPI
     {
         /// <summary>
-        /// Gets the name of the tenant to authenticate against.
+        /// Attempts to authenticate with the Orchestrator API.
         /// </summary>
-        public string TenancyName { get; }
-
-        /// <summary>
-        /// Gets the username or email address.
-        /// </summary>
-        [MinLength(1), Required] public string UsernameOrEmailAddress { get; }
-
-        /// <summary>
-        /// Gets the password.
-        /// </summary>
-        [MinLength(1), Required] public string Password { get; }
+        /// <param name="loginModel">An object containing login information.</param>
+        /// <param name="ct">A cancellation token for this operation.</param>
+        /// <returns>A <see cref="Result{TEntity}"/> containing the auth token.</returns>
+        Task<Result<string>> AuthenticateAsync(ILoginModel loginModel, CancellationToken ct = default);
     }
 }
