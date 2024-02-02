@@ -1,0 +1,21 @@
+﻿<Project Sdk="Remora.Sdk">
+
+  <PropertyGroup>
+    <VersionPrefix>2024.2</VersionPrefix>
+    <Description>Metapackage for Tafs.Orchestrator's various components</Description>
+    <PackageReleaseNotes>
+      Initial Release
+    </PackageReleaseNotes>
+
+    <!-- No need for build output, since this is a metapackage -->
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <NoPackageAnalysis>true</NoPackageAnalysis>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Backend\Tafs.Orchestrator.API\Tafs.Orchestrator.API.csproj" />
+    <ProjectReference Include="..\Backend\Tafs.Orchestrator.Caching\Tafs.Orchestrator.Caching.csproj" />
+    <ProjectReference Include="..\Backend\Tafs.Orchestrator.Rest\Tafs.Orchestrator.Rest.csproj" />
+  </ItemGroup>
+
+</Project>
