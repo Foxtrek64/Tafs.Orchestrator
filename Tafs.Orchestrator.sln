@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34316.72
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{3FAB5653-5AA0-416F-AEE2-1029980F7A24}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{607F6D00-0C35-493A-AEC7-51859959FB38}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{FABC4D36-0E3B-411D-B4AB-DD0D4DA4180C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tafs.Orchestrator.API.Abstractions", "src\Tafs.Orchestrator.API.Abstractions\Tafs.Orchestrator.API.Abstractions.csproj", "{41CE5DC9-E93C-4DF6-9833-B99C216B9ABB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{41CE5DC9-E93C-4DF6-9833-B99C216B9ABB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41CE5DC9-E93C-4DF6-9833-B99C216B9ABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41CE5DC9-E93C-4DF6-9833-B99C216B9ABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41CE5DC9-E93C-4DF6-9833-B99C216B9ABB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{41CE5DC9-E93C-4DF6-9833-B99C216B9ABB} = {607F6D00-0C35-493A-AEC7-51859959FB38}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {897C394C-A299-455D-938A-54DB72C3244E}
+	EndGlobalSection
+EndGlobal
