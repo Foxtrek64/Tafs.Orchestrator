@@ -1,5 +1,5 @@
 ﻿//
-//  IOrchestratorRestAccountAPI.cs
+//  ODataCollectionWrapper.cs
 //
 //  Author:
 //       Devin Duanne <dduanne@tafs.com>
@@ -20,26 +20,20 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-using System.Threading;
-using System.Threading.Tasks;
-using JetBrains.Annotations;
-using Remora.Results;
-using Tafs.Orchestrator.API.Abstractions.API.Objects.Account;
+using System.Collections.Generic;
 
-namespace Tafs.Orchestrator.API.Abstractions.API.Rest
+namespace Tafs.Orchestrator.Rest.API
 {
     /// <summary>
-    /// Represents the Orchestrator Account API.
+    /// Wraps an OData value.
     /// </summary>
-    [PublicAPI]
-    public interface IOrchestratorRestAccountAPI
+    /// <typeparam name="T">The type held by the OData value.</typeparam>
+    /// <param name="Value">The value to wrap.</param>
+    public sealed record class ODataCollectionWrapper<T>(IEnumerable<T> Value) where T : class
     {
         /// <summary>
-        /// Attempts to authenticate with the Orchestrator API.
+        /// Gets the value wrapped in this ODataCollection.
         /// </summary>
-        /// <param name="loginModel">An object containing login information.</param>
-        /// <param name="ct">A cancellation token for this operation.</param>
-        /// <returns>A <see cref="Result{TEntity}"/> containing the auth token.</returns>
-        Task<Result<string>> AuthenticateAsync(ILoginModel loginModel, CancellationToken ct = default);
+        public IEnumerable<T> Value { get; } = Value;
     }
 }

@@ -1,5 +1,5 @@
 ﻿//
-//  IOrchestratorRestAccountAPI.cs
+//  IWebhookEventType.cs
 //
 //  Author:
 //       Devin Duanne <dduanne@tafs.com>
@@ -20,26 +20,21 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-using System.Threading;
-using System.Threading.Tasks;
-using JetBrains.Annotations;
-using Remora.Results;
-using Tafs.Orchestrator.API.Abstractions.API.Objects.Account;
-
-namespace Tafs.Orchestrator.API.Abstractions.API.Rest
+namespace Tafs.Orchestrator.API.Abstractions.API.Objects.Webhooks
 {
     /// <summary>
-    /// Represents the Orchestrator Account API.
+    /// Represents webhook event.
     /// </summary>
-    [PublicAPI]
-    public interface IOrchestratorRestAccountAPI
+    public interface IWebhookEventType
     {
         /// <summary>
-        /// Attempts to authenticate with the Orchestrator API.
+        /// Gets the name of the event.
         /// </summary>
-        /// <param name="loginModel">An object containing login information.</param>
-        /// <param name="ct">A cancellation token for this operation.</param>
-        /// <returns>A <see cref="Result{TEntity}"/> containing the auth token.</returns>
-        Task<Result<string>> AuthenticateAsync(ILoginModel loginModel, CancellationToken ct = default);
+        string Name { get; }
+
+        /// <summary>
+        /// Gets the name of the group this event belongs to.
+        /// </summary>
+        string Group { get; }
     }
 }
