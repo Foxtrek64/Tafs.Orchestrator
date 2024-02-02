@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <VersionPrefix>0.1.0</VersionPrefix>
-    <Description>Provides a default implementation for Tafs.Orchestrator.API.</Description>
+    <Description>Provides caching abstractions.</Description>
     <PackageReleaseNotes>Initial Release.</PackageReleaseNotes>
   </PropertyGroup>
 
@@ -10,11 +10,6 @@
     <PackageReference Include="Remora.Rest" Version="3.3.2" />
     <PackageReference Include="Remora.Results" Version="7.4.1" />
     <PackageReference Include="Remora.Results.Analyzers" Version="1.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Tafs.Orchestrator.API.Abstractions\Tafs.Orchestrator.API.Abstractions.csproj" />
-    <ProjectReference Include="..\Tafs.Orchestrator.Caching.Abstractions\Tafs.Orchestrator.Caching.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

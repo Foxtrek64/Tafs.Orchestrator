@@ -31,28 +31,32 @@ using Remora.Rest.Extensions;
 using Remora.Results;
 using Tafs.Orchestrator.API.Abstractions.API.Objects.Account;
 using Tafs.Orchestrator.API.Abstractions.API.Rest;
+using Tafs.Orchestrator.Caching.Abstractions.Services;
+using Tafs.Orchestrator.Rest.Extensions;
+using Tafs.Orchestrator.Rest.Rest;
 
-namespace Tafs.Orchestrator.API.API.Rest.Account
+namespace Tafs.Orchestrator.Rest.API.Account
 {
-    /// <inheritdoc cref="Tafs.Orchestrator.API.Abstractions.API.Rest.IOrchestratorRestAccountAPI"/>
+    /// <inheritdoc cref="IOrchestratorRestAccountAPI"/>
     [PublicAPI]
     public class OrchestratorRestAccountAPI
     (
             IRestHttpClient restHttpClient,
-            JsonSerializerOptions jsonOptions
+            JsonSerializerOptions jsonOptions,
+            ICacheProvider rateLimitCache
     )
-        : AbstractOrchestratorRestAPI(restHttpClient, jsonOptions),
+        : AbstractOrchestratorRestAPI(restHttpClient, jsonOptions, rateLimitCache),
         IOrchestratorRestAccountAPI
     {
         /// <inheritdoc/>
         public virtual async Task<Result<string>> AuthenticateAsync(ILoginModel loginModel, CancellationToken ct = default)
         {
-            PropertyInfo usernameOrEmailAddress = loginModel.GetType().GetProperty(nameof(ILoginModel.UsernameOrEmailAddress));
-            var stringLength = (StringLengthAttribute)usernameOrEmailAddress.GetCustomAttribute(typeof(StringLengthAttribute));
+            PropertyInfo usernameOrEmailAddress = loginModel.GetType().GetProperty(nameof(ILoginModel.UsernameOrEmailAddress))!;
+            var stringLength = (StringLengthAttribute)usernameOrEmailAddress.GetCustomAttribute(typeof(StringLengthAttribute))!;
             stringLength.IsValid(loginModel.UsernameOrEmailAddress);
 
-            PropertyInfo password = loginModel.GetType().GetProperty(nameof(ILoginModel.Password));
-            stringLength = (StringLengthAttribute)password.GetCustomAttribute(typeof(StringLengthAttribute));
+            PropertyInfo password = loginModel.GetType().GetProperty(nameof(ILoginModel.Password))!;
+            stringLength = (StringLengthAttribute)password.GetCustomAttribute(typeof(StringLengthAttribute))!;
             stringLength.IsValid(loginModel.Password);
 
             return await RestHttpClient.PostAsync<string>
@@ -66,7 +70,7 @@ namespace Tafs.Orchestrator.API.API.Rest.Account
                         json.WriteString("usernameOrEmailAddress", loginModel.UsernameOrEmailAddress);
                         json.WriteString("password", loginModel.Password);
                     }
-                ),
+                ).WithRateLimitContext(RateLimitCache),
                 ct: ct
             );
         }
