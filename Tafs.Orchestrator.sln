@@ -4,12 +4,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{3FAB5653-5AA0-416F-AEE2-1029980F7A24}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
+		global.json = global.json
+		license.md = license.md
+		readme.md = readme.md
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{607F6D00-0C35-493A-AEC7-51859959FB38}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{FABC4D36-0E3B-411D-B4AB-DD0D4DA4180C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tafs.Orchestrator.API.Abstractions", "src\Tafs.Orchestrator.API.Abstractions\Tafs.Orchestrator.API.Abstractions.csproj", "{41CE5DC9-E93C-4DF6-9833-B99C216B9ABB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{93D6D73C-A2D7-4384-84EE-5E5B2B795036}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tafs.Orchestrator.API", "src\Backend\Tafs.Orchestrator.API\Tafs.Orchestrator.API.csproj", "{2C33E19E-B6BB-446C-BE9E-B04D5CD372DC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tafs.Orchestrator.API.Abstractions", "src\Backend\Tafs.Orchestrator.API.Abstractions\Tafs.Orchestrator.API.Abstractions.csproj", "{93572A37-2326-49BA-B50E-2C5F01A25C19}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,16 +28,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{41CE5DC9-E93C-4DF6-9833-B99C216B9ABB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{41CE5DC9-E93C-4DF6-9833-B99C216B9ABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{41CE5DC9-E93C-4DF6-9833-B99C216B9ABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{41CE5DC9-E93C-4DF6-9833-B99C216B9ABB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C33E19E-B6BB-446C-BE9E-B04D5CD372DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C33E19E-B6BB-446C-BE9E-B04D5CD372DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C33E19E-B6BB-446C-BE9E-B04D5CD372DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C33E19E-B6BB-446C-BE9E-B04D5CD372DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93572A37-2326-49BA-B50E-2C5F01A25C19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93572A37-2326-49BA-B50E-2C5F01A25C19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93572A37-2326-49BA-B50E-2C5F01A25C19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93572A37-2326-49BA-B50E-2C5F01A25C19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{41CE5DC9-E93C-4DF6-9833-B99C216B9ABB} = {607F6D00-0C35-493A-AEC7-51859959FB38}
+		{93D6D73C-A2D7-4384-84EE-5E5B2B795036} = {607F6D00-0C35-493A-AEC7-51859959FB38}
+		{2C33E19E-B6BB-446C-BE9E-B04D5CD372DC} = {93D6D73C-A2D7-4384-84EE-5E5B2B795036}
+		{93572A37-2326-49BA-B50E-2C5F01A25C19} = {93D6D73C-A2D7-4384-84EE-5E5B2B795036}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {897C394C-A299-455D-938A-54DB72C3244E}
