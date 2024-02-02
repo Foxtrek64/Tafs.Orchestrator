@@ -1,5 +1,5 @@
 ﻿//
-//  IUpdatePolicy.cs
+//  ILoginModel.cs
 //
 //  Author:
 //       Devin Duanne <dduanne@tafs.com>
@@ -21,22 +21,30 @@
 //
 
 using System.ComponentModel.DataAnnotations;
+using JetBrains.Annotations;
+using Remora.Rest.Core;
 
-namespace Tafs.Orchestrator.API.Abstractions.API.Objects.Updates
+namespace Tafs.Orchestrator.API.Abstractions.API.Objects.Account
 {
     /// <summary>
-    /// Describes the policy applied for robot version updates.
+    /// Represents the body of a login request based on username and password.
     /// </summary>
-    public interface IUpdatePolicy
+    [PublicAPI]
+    public interface ILoginModel
     {
         /// <summary>
-        /// Gets the type of policy.
+        /// Gets the name of the tenant to authenticate against.
         /// </summary>
-        UpdateType Type { get; }
+        Optional<string> TenancyName { get; }
 
         /// <summary>
-        /// Gets the specific version used for the <see cref="UpdateType.SpecificVersion"/> policy type.
+        /// Gets the username or email address.
         /// </summary>
-        [StringLength(128)] string SpecificVersion { get; }
+        [StringLength(int.MaxValue, MinimumLength = 1)] string UsernameOrEmailAddress { get; }
+
+        /// <summary>
+        /// Gets the password.
+        /// </summary>
+        [StringLength(int.MaxValue, MinimumLength = 1)] string Password { get; }
     }
 }

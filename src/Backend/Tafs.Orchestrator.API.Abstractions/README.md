@@ -4,7 +4,7 @@ This package contains a complete set of type and API abstractions for the Orches
 
 These types serve as the foundation of Tafs.Orchestrator's entire API surface, but can just as easily be used to implement your own Orchestrator library, independently of Tafs.Orchestrator.
 
-The primary goal of this project is to model Orchestrator's API as closely as possible, while at the same time applying appropriate C# practices and builtin types (such as `DateTimeOFfset`).
+The primary goal of this project is to model Orchestrator's API as closely as possible, while at the same time applying appropriate C# practices and builtin types (such as `DateTimeOffset`).
 
 ## Structure
 

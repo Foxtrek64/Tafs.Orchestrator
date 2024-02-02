@@ -1,5 +1,5 @@
 ﻿//
-//  IOrchestratorAccountAPI.cs
+//  JobStopStrategy.cs
 //
 //  Author:
 //       Devin Duanne <dduanne@tafs.com>
@@ -20,26 +20,24 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-using System.Threading;
-using System.Threading.Tasks;
 using JetBrains.Annotations;
-using Remora.Results;
-using Tafs.Orchestrator.API.Abstractions.API.Objects.Account;
 
-namespace Tafs.Orchestrator.API.Abstractions.API.Rest
+namespace Tafs.Orchestrator.API.Abstractions.API.Objects.Maintenance
 {
     /// <summary>
-    /// Represents the Orchestrator Account API.
+    /// Enumerates the job stop strategies for a maintenance window.
     /// </summary>
     [PublicAPI]
-    public interface IOrchestratorAccountAPI
+    public enum JobStopStrategy
     {
         /// <summary>
-        /// Attempts to authenticate with the Orchestrator API.
+        /// Do not stop bots. Wait for them to finish.
         /// </summary>
-        /// <param name="loginModel">An object containing login information.</param>
-        /// <param name="ct">A cancellation token for this operation.</param>
-        /// <returns>A <see cref="Result{TEntity}"/> containing the auth token.</returns>
-        Task<Result<string>> AuthenticateAsync(ILoginModel loginModel, CancellationToken ct = default);
+        None,
+
+        /// <summary>
+        /// Terminate bot processes.
+        /// </summary>
+        Kill
     }
 }

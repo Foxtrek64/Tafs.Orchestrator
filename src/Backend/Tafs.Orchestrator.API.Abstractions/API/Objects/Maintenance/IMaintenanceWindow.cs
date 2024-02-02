@@ -1,5 +1,5 @@
 ﻿//
-//  ILoginModel.cs
+//  IMaintenanceWindow.cs
 //
 //  Author:
 //       Devin Duanne <dduanne@tafs.com>
@@ -20,30 +20,45 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-using System.ComponentModel.DataAnnotations;
+using System;
 using JetBrains.Annotations;
 
-namespace Tafs.Orchestrator.API.Abstractions.API.Objects.Account
+namespace Tafs.Orchestrator.API.Abstractions.API.Objects.Maintenance
 {
     /// <summary>
-    /// Represents the body of a login request based on username and password.
+    /// Describes a maintenance window for a cloud machine.
     /// </summary>
     [PublicAPI]
-    public interface ILoginModel
+    public interface IMaintenanceWindow
     {
         /// <summary>
-        /// Gets the name of the tenant to authenticate against.
+        /// Gets a value indicating whether the maintenance window is enabled.
         /// </summary>
-        public string TenancyName { get; }
+        bool Enabled { get; }
 
         /// <summary>
-        /// Gets the username or email address.
+        /// Gets the strategy for stopping jobs when the window begins.
         /// </summary>
-        [MinLength(1), Required] public string UsernameOrEmailAddress { get; }
+        JobStopStrategy JobStopStrategy { get; }
 
         /// <summary>
-        /// Gets the password.
+        /// Gets the recurrence pattern as a cron expression.
         /// </summary>
-        [MinLength(1), Required] public string Password { get; }
+        string CronExpression { get; }
+
+        /// <summary>
+        /// Gets the timezone id.
+        /// </summary>
+        string TimezoneId { get; }
+
+        /// <summary>
+        /// Gets the duration of the maintenance window in minutes.
+        /// </summary>
+        int Duration { get; }
+
+        /// <summary>
+        /// Gets the next execution time of the maintenance window.
+        /// </summary>
+        DateTimeOffset NextExecutionTime { get; }
     }
 }
