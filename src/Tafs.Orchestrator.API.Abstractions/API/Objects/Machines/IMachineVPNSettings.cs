@@ -1,5 +1,5 @@
 ﻿//
-//  IUpdatePolicy.cs
+//  IMachineVPNSettings.cs
 //
 //  Author:
 //       Devin Duanne <dduanne@tafs.com>
@@ -21,24 +21,18 @@
 //
 
 using JetBrains.Annotations;
-using System.ComponentModel.DataAnnotations;
 
-namespace Tafs.Orchestrator.API.Abstractions.API.Objects.Updates
+namespace Tafs.Orchestrator.API.Abstractions.API.Objects.Machines
 {
     /// <summary>
-    /// Describes the policy applied for robot version updates.
+    /// Defines a VPN.
     /// </summary>
     [PublicAPI]
-    public interface IUpdatePolicy
+    public interface IMachineVPNSettings
     {
         /// <summary>
-        /// Gets the type of policy.
+        /// Gets the Classless Inter-Domain Routing address for this VPN.
         /// </summary>
-        UpdateType Type { get; }
-
-        /// <summary>
-        /// Gets the specific version used for the <see cref="UpdateType.SpecificVersion"/> policy type.
-        /// </summary>
-        [StringLength(128)] string SpecificVersion { get; }
+        string CIDR { get; }
     }
 }

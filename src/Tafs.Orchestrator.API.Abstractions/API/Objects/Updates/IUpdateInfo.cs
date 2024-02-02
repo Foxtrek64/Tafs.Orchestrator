@@ -1,5 +1,5 @@
 ﻿//
-//  IUpdatePolicy.cs
+//  IUpdateInfo.cs
 //
 //  Author:
 //       Devin Duanne <dduanne@tafs.com>
@@ -21,24 +21,38 @@
 //
 
 using JetBrains.Annotations;
-using System.ComponentModel.DataAnnotations;
 
 namespace Tafs.Orchestrator.API.Abstractions.API.Objects.Updates
 {
     /// <summary>
-    /// Describes the policy applied for robot version updates.
+    /// Describes a specific update operation.
     /// </summary>
     [PublicAPI]
-    public interface IUpdatePolicy
+    public interface IUpdateInfo
     {
         /// <summary>
-        /// Gets the type of policy.
+        /// Gets the status of this update operation.
         /// </summary>
-        UpdateType Type { get; }
+        UpdateStatus UpdateStatus { get; }
 
         /// <summary>
-        /// Gets the specific version used for the <see cref="UpdateType.SpecificVersion"/> policy type.
+        /// Gets the reason for this update.
         /// </summary>
-        [StringLength(128)] string SpecificVersion { get; }
+        UpdateReason Reason { get; }
+
+        /// <summary>
+        /// Gets the version this update should update to.
+        /// </summary>
+        string TargetUpdateVersion { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether this is a communtiy update.
+        /// </summary>
+        bool IsCommunity { get; }
+
+        /// <summary>
+        /// Gets a status string describing the progress of the update.
+        /// </summary>
+        string StatusInfo { get; }
     }
 }

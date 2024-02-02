@@ -1,5 +1,5 @@
 ﻿//
-//  IUpdatePolicy.cs
+//  ITag.cs
 //
 //  Author:
 //       Devin Duanne <dduanne@tafs.com>
@@ -20,25 +20,35 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-using JetBrains.Annotations;
 using System.ComponentModel.DataAnnotations;
+using JetBrains.Annotations;
 
-namespace Tafs.Orchestrator.API.Abstractions.API.Objects.Updates
+namespace Tafs.Orchestrator.API.Abstractions.API.Objects.Tags
 {
     /// <summary>
-    /// Describes the policy applied for robot version updates.
+    /// Describes a data tag, which provides additional information for objects.
     /// </summary>
     [PublicAPI]
-    public interface IUpdatePolicy
+    public interface ITag
     {
         /// <summary>
-        /// Gets the type of policy.
+        /// Gets the name of this tag.
         /// </summary>
-        UpdateType Type { get; }
+        [StringLength(256)] string Name { get; }
 
         /// <summary>
-        /// Gets the specific version used for the <see cref="UpdateType.SpecificVersion"/> policy type.
+        /// Gets the display name for this tag.
         /// </summary>
-        [StringLength(128)] string SpecificVersion { get; }
+        [StringLength(256)] string DisplayName { get; }
+
+        /// <summary>
+        /// Gets the value of this tag.
+        /// </summary>
+        [StringLength(256)] string Value { get; }
+
+        /// <summary>
+        /// Gets the display value for this tag.
+        /// </summary>
+        [StringLength(256)] string DisplayValue { get; }
     }
 }

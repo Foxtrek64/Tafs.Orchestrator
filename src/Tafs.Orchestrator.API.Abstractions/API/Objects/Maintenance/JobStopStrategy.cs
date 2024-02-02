@@ -1,5 +1,5 @@
 ﻿//
-//  IUpdatePolicy.cs
+//  JobStopStrategy.cs
 //
 //  Author:
 //       Devin Duanne <dduanne@tafs.com>
@@ -21,24 +21,23 @@
 //
 
 using JetBrains.Annotations;
-using System.ComponentModel.DataAnnotations;
 
-namespace Tafs.Orchestrator.API.Abstractions.API.Objects.Updates
+namespace Tafs.Orchestrator.API.Abstractions.API.Objects.Maintenance
 {
     /// <summary>
-    /// Describes the policy applied for robot version updates.
+    /// Enumerates the job stop strategies for a maintenance window.
     /// </summary>
     [PublicAPI]
-    public interface IUpdatePolicy
+    public enum JobStopStrategy
     {
         /// <summary>
-        /// Gets the type of policy.
+        /// Do not stop bots. Wait for them to finish.
         /// </summary>
-        UpdateType Type { get; }
+        None,
 
         /// <summary>
-        /// Gets the specific version used for the <see cref="UpdateType.SpecificVersion"/> policy type.
+        /// Terminate bot processes.
         /// </summary>
-        [StringLength(128)] string SpecificVersion { get; }
+        Kill
     }
 }
