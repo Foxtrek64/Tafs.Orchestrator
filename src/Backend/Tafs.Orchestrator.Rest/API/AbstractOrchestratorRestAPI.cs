@@ -24,8 +24,9 @@ using System;
 using System.Text.Json;
 using JetBrains.Annotations;
 using Remora.Rest;
+using Tafs.Orchestrator.Caching.Abstractions.Services;
 
-namespace Tafs.Orchestrator.API.API.Rest
+namespace Tafs.Orchestrator.Rest.Rest
 {
     /// <summary>
     /// Acts as an abstract base for REST API instances.
@@ -43,18 +44,26 @@ namespace Tafs.Orchestrator.API.API.Rest
         protected JsonSerializerOptions JsonOptions { get; }
 
         /// <summary>
+        /// Gets the rate limit memory cache.
+        /// </summary>
+        protected ICacheProvider RateLimitCache { get; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="AbstractOrchestratorRestAPI"/> class.
         /// </summary>
         /// <param name="restHttpClient">The Orchestrator-specialized http client.</param>
         /// <param name="jsonOptions">The Remora-specialized json options.</param>
+        /// <param name="rateLimitCache">The memor cache used for rate limits.</param>
         protected AbstractOrchestratorRestAPI
         (
             IRestHttpClient restHttpClient,
-            JsonSerializerOptions jsonOptions
+            JsonSerializerOptions jsonOptions,
+            ICacheProvider rateLimitCache
         )
         {
             RestHttpClient = restHttpClient;
             JsonOptions = jsonOptions;
+            RateLimitCache = rateLimitCache;
         }
 
         /// <inheritdoc/>
