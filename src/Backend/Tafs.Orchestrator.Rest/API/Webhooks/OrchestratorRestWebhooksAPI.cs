@@ -22,7 +22,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Remora.Rest;
@@ -229,7 +232,10 @@ namespace Tafs.Orchestrator.Rest.API.Webhooks
             => await RestHttpClient.PostAsync<ICustomEvent<TPayload>>
             (
                 "/odata/Webhooks/UiPath.Server.Configuration.OData.TriggerCustom",
-                b => b.AddODataQueryParameters(parameters).WithRateLimitContext(RateLimitCache),
+                b => b
+                    .WithJson(json => json.Write("body", payload, JsonOptions))
+                    .AddODataQueryParameters(parameters)
+                    .WithRateLimitContext(RateLimitCache),
                 ct: ct
             );
     }
