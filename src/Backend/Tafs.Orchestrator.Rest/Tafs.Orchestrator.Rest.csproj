@@ -7,14 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="API\Webhooks\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Polly" Version="8.2.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Tafs.Orchestrator.API.Abstractions\Tafs.Orchestrator.API.Abstractions.csproj" />
     <ProjectReference Include="..\Tafs.Orchestrator.Caching.Abstractions\Tafs.Orchestrator.Caching.Abstractions.csproj" />
   </ItemGroup>
 
