@@ -1,5 +1,5 @@
 ﻿//
-//  IOrchestratorRestAccountAPI.cs
+//  ICustomEvent.cs
 //
 //  Author:
 //       Devin Duanne <dduanne@tafs.com>
@@ -20,26 +20,19 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-using System.Threading;
-using System.Threading.Tasks;
-using JetBrains.Annotations;
-using Remora.Results;
-using Tafs.Orchestrator.API.Abstractions.API.Objects.Account;
+using Remora.Rest.Core;
 
-namespace Tafs.Orchestrator.API.Abstractions.API.Rest
+namespace Tafs.Orchestrator.API.Abstractions.API.Objects.Webhooks
 {
     /// <summary>
-    /// Represents the Orchestrator Account API.
+    /// Describes an event triggered by a robot Orchestrator activity.
     /// </summary>
-    [PublicAPI]
-    public interface IOrchestratorRestAccountAPI
+    /// <typeparam name="TEventData">The event data.</typeparam>
+    public interface ICustomEvent<TEventData> : IEvent
     {
         /// <summary>
-        /// Attempts to authenticate with the Orchestrator API.
+        /// Gets the event data.
         /// </summary>
-        /// <param name="loginModel">An object containing login information.</param>
-        /// <param name="ct">A cancellation token for this operation.</param>
-        /// <returns>A <see cref="Result{TEntity}"/> containing the auth token.</returns>
-        Task<Result<string>> AuthenticateAsync(ILoginModel loginModel, CancellationToken ct = default);
+        Optional<TEventData> EventData { get; }
     }
 }

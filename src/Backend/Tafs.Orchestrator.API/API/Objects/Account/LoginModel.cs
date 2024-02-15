@@ -1,5 +1,5 @@
 ﻿//
-//  IOrchestratorRestAccountAPI.cs
+//  LoginModel.cs
 //
 //  Author:
 //       Devin Duanne <dduanne@tafs.com>
@@ -20,26 +20,17 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-using System.Threading;
-using System.Threading.Tasks;
-using JetBrains.Annotations;
-using Remora.Results;
+using Remora.Rest.Core;
 using Tafs.Orchestrator.API.Abstractions.API.Objects.Account;
 
-namespace Tafs.Orchestrator.API.Abstractions.API.Rest
+namespace Tafs.Orchestrator.API.API.Objects.Account
 {
-    /// <summary>
-    /// Represents the Orchestrator Account API.
-    /// </summary>
-    [PublicAPI]
-    public interface IOrchestratorRestAccountAPI
-    {
-        /// <summary>
-        /// Attempts to authenticate with the Orchestrator API.
-        /// </summary>
-        /// <param name="loginModel">An object containing login information.</param>
-        /// <param name="ct">A cancellation token for this operation.</param>
-        /// <returns>A <see cref="Result{TEntity}"/> containing the auth token.</returns>
-        Task<Result<string>> AuthenticateAsync(ILoginModel loginModel, CancellationToken ct = default);
-    }
+    /// <inheritdoc cref="ILoginModel"/>
+    public sealed record class LoginModel
+    (
+        Optional<string> TenancyName,
+        string UsernameOrEmailAddress,
+        string Password
+    )
+        : ILoginModel;
 }

@@ -25,6 +25,7 @@ using JetBrains.Annotations;
 using Polly;
 using Remora.Rest;
 using Remora.Rest.Core;
+using Tafs.Orchestrator.API.Abstractions.API.Objects.OData;
 using Tafs.Orchestrator.Caching.Abstractions.Services;
 
 namespace Tafs.Orchestrator.Rest.Extensions
@@ -114,5 +115,28 @@ namespace Tafs.Orchestrator.Rest.Extensions
             => value.HasValue
                 ? builder.AddQueryParameter(name, value.Value?.ToString() ?? string.Empty)
                 : builder;
+
+        /// <summary>
+        /// Configures the request with OData Query parameters.
+        /// </summary>
+        /// <param name="builder">The request builder to modify.</param>
+        /// <param name="parameters">The request parameters.</param>
+        /// <returns>The builder.</returns>
+        public static RestRequestBuilder AddODataQueryParameters(this RestRequestBuilder builder, IParameters? parameters = null)
+        {
+            if (parameters is null)
+            {
+                return builder;
+            }
+
+            return builder
+                    .AddQueryParameter("$expand", parameters.Expand)
+                    .AddQueryParameter("$filter", parameters.Filter)
+                    .AddQueryParameter("$select", parameters.Select)
+                    .AddQueryParameter("$orderby", parameters.OrderBy)
+                    .AddQueryParameter("$top", parameters.Top)
+                    .AddQueryParameter("$skip", parameters.Skip)
+                    .AddQueryParameter("$count", parameters.Count);
+        }
     }
 }

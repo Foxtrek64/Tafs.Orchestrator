@@ -1,5 +1,5 @@
 ﻿//
-//  LoginModel.cs
+//  Parameters.cs
 //
 //  Author:
 //       Devin Duanne <dduanne@tafs.com>
@@ -21,16 +21,19 @@
 //
 
 using Remora.Rest.Core;
-using Tafs.Orchestrator.API.Abstractions.API.Objects.Account;
+using Tafs.Orchestrator.API.Abstractions.API.Objects.OData;
 
-namespace Tafs.Orchestrator.API.API.Objects
+namespace Tafs.Orchestrator.API.API.Objects.OData
 {
-    /// <inheritdoc cref="ILoginModel"/>
-    public sealed record class LoginModel
+    /// <inheritdoc/>
+    public sealed record class Parameters
     (
-        Optional<string> TenancyName,
-        string UsernameOrEmailAddress,
-        string Password
-    )
-        : ILoginModel;
+        Optional<string> Expand,
+        Optional<string> Filter,
+        Optional<string> Select,
+        Optional<string> OrderBy,
+        Optional<int> Top,
+        Optional<int> Skip,
+        Optional<bool> Count
+    ) : IParameters;
 }
