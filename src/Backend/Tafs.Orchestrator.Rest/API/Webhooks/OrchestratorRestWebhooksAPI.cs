@@ -233,7 +233,7 @@ namespace Tafs.Orchestrator.Rest.API.Webhooks
             (
                 "/odata/Webhooks/UiPath.Server.Configuration.OData.TriggerCustom",
                 b => b
-                    .WithJson(json => json.Write("body", payload, JsonOptions))
+                    .WithJson(json => JsonSerializer.Serialize(json, payload, JsonOptions), withStartEndMarkers: false)
                     .AddODataQueryParameters(parameters)
                     .WithRateLimitContext(RateLimitCache),
                 ct: ct
