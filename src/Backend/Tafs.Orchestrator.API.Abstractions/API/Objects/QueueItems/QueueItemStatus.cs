@@ -1,5 +1,5 @@
 ﻿//
-//  IFolder.cs
+//  QueueItemStatus.cs
 //
 //  Author:
 //       Devin Duanne <dduanne@tafs.com>
@@ -20,61 +20,46 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-using System;
-using System.ComponentModel.DataAnnotations;
-using JetBrains.Annotations;
-
-namespace Tafs.Orchestrator.API.Abstractions.API.Objects.Folders
+namespace Tafs.Orchestrator.API.Abstractions.API.Objects.QueueItems
 {
     /// <summary>
-    /// Describes a folder.
+    /// Enumerates the queue statuses.
     /// </summary>
-    [PublicAPI]
-    public interface IFolder : ISimpleFolder
+    public enum QueueItemStatus
     {
         /// <summary>
-        /// Gets a unique key for the folder.
+        /// The queue item was created and is awaiting processing.
         /// </summary>
-        Guid Key { get; }
+        New = 0,
 
         /// <summary>
-        /// Gets the folder description.
+        /// The queue item is currently being worked.
         /// </summary>
-        [StringLength(500)] string Description { get; }
+        InProgress = 1,
 
         /// <summary>
-        /// Gets the folder type.
+        /// The queue items failed processing.
         /// </summary>
-        FolderType FolderType { get; }
+        Failed = 2,
 
         /// <summary>
-        /// Gets a value indicating whether the folder is personal.
+        /// The queue item was successful.
         /// </summary>
-        bool IsPersonal { get; }
+        Successful = 3,
 
         /// <summary>
-        /// Gets the robot provisioning type.
+        /// The queue item was abandoned.
         /// </summary>
-        ProvisionType ProvisionType { get; }
+        Abandoned = 4,
 
         /// <summary>
-        /// Gets the folder permissions model.
+        /// The queue item was retried.
         /// </summary>
-        PermissionModel PermissionModel { get; }
+        Retried = 5,
 
         /// <summary>
-        /// Gets the id of the parent folder in the folders heirarchy.
+        /// The queue item was deleted.
         /// </summary>
-        long? ParentId { get; }
-
-        /// <summary>
-        /// Gets the unique key for the parent folder.
-        /// </summary>
-        Guid? ParentKey { get; }
-
-        /// <summary>
-        /// Gets the folder feed type.
-        /// </summary>
-        FeedType FeedType { get; }
+        Deleted = 6,
     }
 }

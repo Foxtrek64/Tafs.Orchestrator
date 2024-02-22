@@ -1,5 +1,5 @@
 ﻿//
-//  IFolder.cs
+//  IEnvironment.cs
 //
 //  Author:
 //       Devin Duanne <dduanne@tafs.com>
@@ -21,60 +21,44 @@
 //
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using JetBrains.Annotations;
+using Remora.Rest.Core;
+using Tafs.Orchestrator.API.Abstractions.API.Objects.Robots;
 
-namespace Tafs.Orchestrator.API.Abstractions.API.Objects.Folders
+namespace Tafs.Orchestrator.API.Abstractions.API.Objects.Environments
 {
     /// <summary>
-    /// Describes a folder.
+    /// Describes a grouping of robots.
     /// </summary>
     [PublicAPI]
-    public interface IFolder : ISimpleFolder
+    public interface IEnvironment
     {
         /// <summary>
-        /// Gets a unique key for the folder.
+        /// Gets the name of the environment.
         /// </summary>
-        Guid Key { get; }
+        [StringLength(100)] string Name { get; }
 
         /// <summary>
-        /// Gets the folder description.
+        /// Gets a description of the environment.
         /// </summary>
-        [StringLength(500)] string Description { get; }
+        [StringLength(500)] Optional<string> Description { get; }
 
         /// <summary>
-        /// Gets the folder type.
+        /// Gets a list of the robots associated with the current environment.
         /// </summary>
-        FolderType FolderType { get; }
+        Optional<IReadOnlyList<ISimpleRobot>> Robots { get; }
 
         /// <summary>
-        /// Gets a value indicating whether the folder is personal.
+        /// Gets the environment type.
         /// </summary>
-        bool IsPersonal { get; }
+        [Obsolete("Deprecated in version 17.0.")]
+        Optional<string> Type { get; }
 
         /// <summary>
-        /// Gets the robot provisioning type.
+        /// Gets the environment id.
         /// </summary>
-        ProvisionType ProvisionType { get; }
-
-        /// <summary>
-        /// Gets the folder permissions model.
-        /// </summary>
-        PermissionModel PermissionModel { get; }
-
-        /// <summary>
-        /// Gets the id of the parent folder in the folders heirarchy.
-        /// </summary>
-        long? ParentId { get; }
-
-        /// <summary>
-        /// Gets the unique key for the parent folder.
-        /// </summary>
-        Guid? ParentKey { get; }
-
-        /// <summary>
-        /// Gets the folder feed type.
-        /// </summary>
-        FeedType FeedType { get; }
+        Optional<long> Id { get; }
     }
 }

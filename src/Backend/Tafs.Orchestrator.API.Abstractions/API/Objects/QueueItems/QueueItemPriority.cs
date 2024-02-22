@@ -1,5 +1,5 @@
 ﻿//
-//  ProvisionType.cs
+//  QueueItemPriority.cs
 //
 //  Author:
 //       Devin Duanne <dduanne@tafs.com>
@@ -20,24 +20,26 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-using JetBrains.Annotations;
-
-namespace Tafs.Orchestrator.API.Abstractions.API.Objects.Folders
+namespace Tafs.Orchestrator.API.Abstractions.API.Objects.QueueItems
 {
     /// <summary>
-    /// Enumerates the provisioning types.
+    /// Enumerates the queue item priority.
     /// </summary>
-    [PublicAPI]
-    public enum ProvisionType
+    public enum QueueItemPriority
     {
         /// <summary>
-        /// Provisioning is manual.
+        /// High priority.
         /// </summary>
-        Manual,
+        High = 0,
 
         /// <summary>
-        /// Provisioning is automatic.
+        /// Normal priority.
         /// </summary>
-        Automatic
+        Normal = 1,
+
+        /// <summary>
+        /// Low priority.
+        /// </summary>
+        Low = 2
     }
 }

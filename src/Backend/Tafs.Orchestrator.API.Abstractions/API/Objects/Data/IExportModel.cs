@@ -1,5 +1,5 @@
 ﻿//
-//  IFolder.cs
+//  IExportModel.cs
 //
 //  Author:
 //       Devin Duanne <dduanne@tafs.com>
@@ -21,60 +21,48 @@
 //
 
 using System;
-using System.ComponentModel.DataAnnotations;
-using JetBrains.Annotations;
+using Remora.Rest.Core;
 
-namespace Tafs.Orchestrator.API.Abstractions.API.Objects.Folders
+namespace Tafs.Orchestrator.API.Abstractions.API.Objects.Data
 {
     /// <summary>
-    /// Describes a folder.
+    /// Gets the status of an export.
     /// </summary>
-    [PublicAPI]
-    public interface IFolder : ISimpleFolder
+    public interface IExportModel
     {
         /// <summary>
-        /// Gets a unique key for the folder.
+        /// Gets the unique id of this export request.
         /// </summary>
-        Guid Key { get; }
+        Optional<long> Key { get; }
 
         /// <summary>
-        /// Gets the folder description.
+        /// Gets the name of the export request.
         /// </summary>
-        [StringLength(500)] string Description { get; }
+        Optional<string> Name { get; }
 
         /// <summary>
-        /// Gets the folder type.
+        /// Gets the type of data this export request is handling.
         /// </summary>
-        FolderType FolderType { get; }
+        Optional<ExportType> Type { get; }
 
         /// <summary>
-        /// Gets a value indicating whether the folder is personal.
+        /// Gets the status of the export operation.
         /// </summary>
-        bool IsPersonal { get; }
+        Optional<ExportStatus> Status { get; }
 
         /// <summary>
-        /// Gets the robot provisioning type.
+        /// Gets the date and time the export was requested.
         /// </summary>
-        ProvisionType ProvisionType { get; }
+        Optional<DateTimeOffset> RequestedAt { get; }
 
         /// <summary>
-        /// Gets the folder permissions model.
+        /// Gets the date and time the export was started.
         /// </summary>
-        PermissionModel PermissionModel { get; }
+        Optional<DateTimeOffset> ExecutedAt { get; }
 
         /// <summary>
-        /// Gets the id of the parent folder in the folders heirarchy.
+        /// Gets the size in bytes of the export.
         /// </summary>
-        long? ParentId { get; }
-
-        /// <summary>
-        /// Gets the unique key for the parent folder.
-        /// </summary>
-        Guid? ParentKey { get; }
-
-        /// <summary>
-        /// Gets the folder feed type.
-        /// </summary>
-        FeedType FeedType { get; }
+        long Size { get; }
     }
 }
